@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Simon</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <div class="container">
+
+      <h1>MEMORY GAME</h1>
+
+      <p id="title">Inizio countdown</p>
+
+    </div>
+
+
+    <script>
+
+    // Un alert() espone 5 numeri generati casualmente. ok
+    // Da li parte un timer di 30 secondi. ok
+    // Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
+    // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
+
+    var r1 =  Math.floor(Math.random() * 100) + 1;
+    var r2 =  Math.floor(Math.random() * 100) + 1;
+    var r3 =  Math.floor(Math.random() * 100) + 1;
+    var r4 =  Math.floor(Math.random() * 100) + 1;
+    var r5 =  Math.floor(Math.random() * 100) + 1;
+
+    var prova = [r1, r2, r3, r4, r5]
+
+    var sec = 30;
+
+    var clock;
+
+
+    function tick() {
+
+      document.getElementById('title').innerHTML = sec--;
+
+      if (sec < 0) {
+
+        clearInterval(clock);
+
+        document.getElementById('title').innerHTML = 'Fine del tempo!';
+
+        }
+    }
+
+    function attesaPrompt(){
+
+      var utenteNum = [];
+      var numeriOk = [];
+
+
+      while(utenteNum.length < 5){
+
+
+        var numeroUtente = parseInt(prompt('Inserisci il numero'));
+
+        if(!utenteNum.includes(numeroUtente)){
+
+          utenteNum.push(numeroUtente);
+
+          if(prova.includes(numeroUtente)){
+
+            numeriOk.push(numeroUtente);
+
+          }
+        }
+
+      }
+
+      console.log('I numeri che hai scelto sono: ' + utenteNum)
+      console.log('I numeri corretti sono: ' + numeriOk);
+      console.log('Hai totalizzato ' + numeriOk.length + ' punti!');
+
+    }
+
+    function init() {
+
+      alert('Memorizza questi numeri ' + prova);
+
+      clock = setInterval(tick, 1000);
+
+      console.log('Numeri da ricordare: '+ prova);
+
+      setTimeout(attesaPrompt,32000);
+
+    }
+
+    init()
+
+    </script>
+
+  </body>
+</html>
